@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <title>Home</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="home-container">
+      <div class="bio">
+        <h1>Fiona Shen</h1>
+        <h2>Graduate Student at Johns Hopkins University</h2>
+        <p>
+            I am a graduate student at Johns Hopkins University with an interest in technology, innovation, and data science.
+        </p>
+      </div>
+      <img src="{{ url_for('static', filename='images/profile.jpg') }}" alt="Profile Picture">
+    </div>
+</body>
+</html>   
