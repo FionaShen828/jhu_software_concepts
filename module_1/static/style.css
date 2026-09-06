@@ -7,3 +7,17 @@ img {
     align-items: center;
     justify-content: space-between;
 }
+nav {
+    background-color: lightblue;
+    padding: 15px;
+    text-align: right;
+}
+
+nav a {
+    margin-left: 20px;
+    text-decoration: none;
+}
+nav a.active {
+    font-weight: bold;
+    text-decoration: underline;
+}
