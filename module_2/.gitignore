@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+.DS_Store
+
+llm_hosting/models/
+*.gguf
+
+applicant_data_checkpoint.json
+_llm_output.jsonl
