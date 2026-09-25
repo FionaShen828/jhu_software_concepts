@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+.DS_Store
+
+.pytest_cache/
+.coverage
+docs/_build/
+
+llm_hosting/models/
+*.gguf
+
+applicant_data_checkpoint.json
+_llm_output.jsonl

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GradCafe Admissions Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <div>
+            <h1>GradCafe Admissions Analysis</h1>
+            <p>Graduate admissions data analyzed using PostgreSQL and SQLAlchemy.</p>
+        </div>
+
+        <form action="{{ url_for('update_analysis') }}" method="POST">
+            <button
+                type="submit"
+                data-testid="update-analysis-btn"
+            >
+                Update Analysis
+            </button>
+        </form>
+    </header>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div>
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <main>
+
+        <section>
+            <h2>Required Analysis</h2>
+
+            <div>
+                <h3>Question 1</h3>
+                <p>How many entries applied for Fall 2026?</p>
+                <p>Answer: <strong>{{ results.q1 }}</strong></p>
+            </div>
+
+            <div>
+                <h3>Question 2</h3>
+                <p>What percentage of applicants with usable nationality data are international?</p>
+                <p>Answer: <strong>{{ results.q2 }}</strong></p>
+            </div>
+
+            <div>
+                <h3>Question 3</h3>
+                <p>What are the average GPA and GRE scores?</p>
+
+                <p>Answer:</p>
+                <p>Average GPA: <strong>{{ results.q3_gpa }}</strong></p>
+                <p>Average GRE Quantitative: <strong>{{ results.q3_gre }}</strong></p>
+                <p>Average GRE Verbal: <strong>{{ results.q3_gre_v }}</strong></p>
+                <p>Average GRE Analytical Writing: <strong>{{ results.q3_gre_aw }}</strong></p>
+            </div>
+
+            <div>
+                <h3>Question 4</h3>
+                <p>What is the average GPA of American applicants who applied for Fall 2026?</p>
+                <p>Answer: <strong>{{ results.q4 }}</strong></p>
+            </div>
+
+            <div>
+                <h3>Question 5</h3>
+                <p>What percentage of Fall 2025 entries are acceptances?</p>
+                <p>Answer: <strong>{{ results.q5 }}</strong></p>
+            </div>
+
+            <div>
+                <h3>Question 6</h3>
+                <p>What is the average GPA of accepted Fall 2026 applicants?</p>
+                <p>Answer: <strong>{{ results.q6 }}</strong></p>
+            </div>
+
+            <div>
+                <h3>Question 7</h3>
+                <p>
+                    How many applicants applied to Johns Hopkins University
+                    for a master's degree in Computer Science?
+                </p>
+                <p>Answer: <strong>{{ results.q7 }}</strong></p>
+            </div>
+
+            <div>
+                <h3>Question 8</h3>
+                <p>
+                    How many Fall 2026 accepted PhD Computer Science applicants
+                    applied to Georgetown, MIT, Stanford, or Carnegie Mellon
+                    using the original fields?
+                </p>
+                <p>Answer: <strong>{{ results.q8 }}</strong></p>
+            </div>
+
+            <div>
+                <h3>Question 9</h3>
+                <p>
+                    How does the original-field result compare with the
+                    LLM-generated-field result?
+                </p>
+
+                <p>Answer:</p>
+                <p>Original-field count: <strong>{{ results.q8 }}</strong></p>
+                <p>LLM-field count: <strong>{{ results.q9 }}</strong></p>
+                <p>Difference: <strong>{{ results.q9_difference }}</strong></p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Original Questions</h2>
+
+            <div>
+                <h3>Original Question 1</h3>
+                <p>What percentage of Fall 2026 entries are acceptances?</p>
+                <p>Answer: <strong>{{ results.original_1 }}</strong></p>
+            </div>
+
+            <div>
+                <h3>Original Question 2</h3>
+                <p>What is the average GPA of international applicants?</p>
+                <p>Answer: <strong>{{ results.original_2 }}</strong></p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Data Refresh</h2>
+
+            <p>
+                Pull Data retrieves newly available GradCafe data and updates
+                the PostgreSQL database.
+            </p>
+
+            {% if scrape_running %}
+                <p>
+                    <strong>
+                        New data is currently being retrieved.
+                    </strong>
+                </p>
+
+                <button
+                    type="button"
+                    data-testid="pull-data-btn"
+                    disabled
+                >
+                    Pull Data
+                </button>
+
+            {% else %}
+
+                <form action="{{ url_for('pull_data') }}" method="POST">
+                    <button
+                        type="submit"
+                        data-testid="pull-data-btn"
+                    >
+                        Pull Data
+                    </button>
+                </form>
+
+            {% endif %}
+
+        </section>
+
+    </main>
+
+</body>
+</html>
